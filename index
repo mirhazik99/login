@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Login</title>
+  <link rel="stylesheet" href="style.css">
+<style type="text/css" id="dcoder_stylesheet">body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url('https://i.postimg.cc/yN9K4BLX/game-games-2014-best-wallpaper-preview.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  text-align: center;
+}
+
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loading-circle {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.2);
+  border-top: 5px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+button {
+  margin: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #444;
+  color: white;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #666;
+}
+
+.main-screen, .logged-screen {
+  padding: 20px;
+  margin-top: 20%;
+}</style></head>
+<body>
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-circle"></div>
+    <p id="loadingText">Getting Your ID...</p>
+  </div>
+
+  <div class="main-screen" id="mainScreen" style="display: none;">
+    <h1>Please Subscribe and Join Telegram</h1>
+    <button id="youtubeBtn">Subscribe on YouTube</button>
+    <button id="telegramBtn" disabled>Join Telegram</button>
+  </div>
+
+  <div class="logged-screen" id="loggedScreen" style="display: none;">
+    <h1>Logged as Qw'***********</h1>
+    <button onclick="alert('You are logged!')">Go to Game</button>
+  </div>
+
+  <script src="script.js"></script>
+
+<script type="text/javascript" id="dcoder_script">window.onload = function () {
+  const loadingScreen = document.getElementById('loadingScreen');
+  const mainScreen = document.getElementById('mainScreen');
+  const loggedScreen = document.getElementById('loggedScreen');
+  const loadingText = document.getElementById('loadingText');
+  const youtubeBtn = document.getElementById('youtubeBtn');
+  const telegramBtn = document.getElementById('telegramBtn');
+
+  const steps = [
+    "Getting Your ID...",
+    "Making Registration...",
+    "Getting Your Information...",
+    "Making Eligible...",
+    "Registered!",
+  ];
+
+  let stepIndex = 0;
+
+  const updateLoadingText = () => {
+    if (stepIndex < steps.length) {
+      loadingText.textContent = steps[stepIndex];
+      stepIndex++;
+    } else {
+      clearInterval(loadingInterval);
+      loadingScreen.style.display = "none";
+      mainScreen.style.display = "block";
+    }
+  };
+
+  const loadingInterval = setInterval(updateLoadingText, 1000);
+
+  youtubeBtn.onclick = function () {
+    window.open("https://www.youtube.com/@GamesByHazik", "_blank");
+    youtubeBtn.disabled = true;
+    telegramBtn.disabled = false;
+  };
+
+  telegramBtn.onclick = function () {
+    window.open("https://t.me/GamesByHazik", "_blank");
+    mainScreen.style.display = "none";
+    loggedScreen.style.display = "block";
+  };
+};</script></body></html>
